@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coastal Digital — Web Design · Jacksonville, FL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --navy:#1a3454;
+      --deep:#0f1e30;
+      --mid:#2b6cb0;
+      --sky:#4a9fd4;
+      --cyan:#7ec8e3;
+      --cyan-lt:#b8e3f0;
+      --white:#ffffff;
+      --off:#f4f8fb;
+      --sand:#ede9e3;
+      --text:#1a2535;
+      --muted:#5a7080;
+      --border:rgba(74,159,212,0.15)
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden;cursor:none}
+
+    /* ── CURSOR ── */
+    #cur,#curR{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);border-radius:50%}
+    #cur{width:8px;height:8px;background:var(--sky);transition:width .3s,height .3s,background .3s}
+    #curR{width:32px;height:32px;border:1.5px solid var(--cyan);opacity:.45;z-index:9998;transition:width .3s,height .3s}
+
+    /* ── NAV ── */
+    nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;transition:background .4s,padding .4s,box-shadow .4s}
+    nav.sc{background:rgba(9,19,32,.96);backdrop-filter:blur(14px);padding:14px 60px;box-shadow:0 1px 0 rgba(74,159,212,.1)}
+    .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .logo svg{width:40px;height:40px;flex-shrink:0}
+    .logo-t{display:flex;flex-direction:column}
+    .logo-m{font-size:.95rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;color:#fff;line-height:1}
+    .logo-s{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-top:3px}
+    .nav-ul{display:flex;gap:32px;list-style:none}
+    .nav-ul a{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.6);transition:color .3s;position:relative;padding-bottom:2px}
+    .nav-ul a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--cyan);transition:width .3s}
+    .nav-ul a:hover{color:#fff}
+    .nav-ul a:hover::after{width:100%}
+    .nav-btn{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--cyan);padding:11px 24px;font-weight:500;transition:background .3s,transform .3s;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px))}
+    .nav-btn:hover{background:var(--cyan-lt);transform:translateY(-1px)}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;background:var(--deep)}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 75% 40%,rgba(43,108,176,.32) 0%,transparent 65%),radial-gradient(ellipse 40% 35% at 10% 75%,rgba(74,159,212,.14) 0%,transparent 60%),linear-gradient(155deg,#0a1520 0%,#1a3454 50%,#0d2038 100%)}
+    .hero-waves{position:absolute;bottom:0;left:0;right:0;height:44%;pointer-events:none}
+    .hero-waves svg{width:100%;height:100%}
+    .pts{position:absolute;inset:0;pointer-events:none}
+    .pt{position:absolute;border-radius:50%;background:var(--cyan);opacity:0;animation:floatUp linear infinite}
+    .hero-c{position:relative;z-index:2;padding:0 60px;max-width:840px}
+    .h-eyebrow{display:flex;align-items:center;gap:14px;font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);font-weight:500;margin-bottom:24px;opacity:0;animation:up .7s ease .3s forwards}
+    .h-line{width:32px;height:1px;background:var(--cyan)}
+    .h-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:600;line-height:1.06;color:#fff;letter-spacing:-.02em;margin-bottom:26px;opacity:0;animation:up .8s ease .5s forwards}
+    .h-grad{font-style:italic;background:linear-gradient(130deg,var(--sky),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .h-body{font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.48);max-width:460px;font-weight:300;margin-bottom:46px;opacity:0;animation:up .8s ease .7s forwards}
+    .h-btns{display:flex;align-items:center;gap:20px;opacity:0;animation:up .8s ease .9s forwards}
+    .btn-fill{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--cyan);padding:15px 32px;font-weight:500;transition:background .3s,transform .3s;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px))}
+    .btn-fill:hover{background:var(--cyan-lt);transform:translateY(-2px)}
+    .btn-ghost{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.58);font-weight:300;border-bottom:1px solid rgba(126,200,227,.3);padding-bottom:2px;transition:color .3s,border-color .3s}
+    .btn-ghost:hover{color:var(--cyan);border-color:var(--cyan)}
+    .h-loc{position:absolute;bottom:36px;right:60px;display:flex;align-items:center;gap:9px;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);opacity:0;animation:fi 1s ease 1.3s forwards}
+    .loc-d{width:6px;height:6px;border-radius:50%;background:var(--cyan);opacity:.5;animation:pulse 2s ease infinite}
+    .h-scroll{position:absolute;bottom:36px;left:60px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fi 1s ease 1.5s forwards}
+    .h-sbar{width:1px;height:46px;background:linear-gradient(to bottom,transparent,var(--cyan))}
+    .h-stxt{font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.22);writing-mode:vertical-lr}
+
+    /* ── TICKER ── */
+    .ticker{background:linear-gradient(90deg,var(--navy) 0%,var(--mid) 50%,var(--navy) 100%);border-top:1px solid rgba(74,159,212,.18);border-bottom:1px solid rgba(74,159,212,.18);padding:12px 0;overflow:hidden}
+    .ticker-t{display:inline-flex;white-space:nowrap;animation:tick 22s linear infinite}
+    .ti{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 30px}
+    .ts{display:inline-block;width:3px;height:3px;background:var(--cyan);border-radius:50%;vertical-align:middle;opacity:.45}
+
+    /* ── LAYOUT HELPERS ── */
+    .w{max-width:1180px;margin:0 auto;padding:0 60px}
+    .sp{padding:110px 0}
+    .ey{display:flex;align-items:center;gap:11px;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--sky);font-weight:500;margin-bottom:16px}
+    .ey::before{content:'';width:26px;height:1px;background:var(--sky)}
+    .stitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.2vw,3.1rem);font-weight:600;line-height:1.12;color:var(--deep);letter-spacing:-.01em}
+    .stitle em{font-style:italic;color:var(--mid)}
+    .stitle.li{color:#fff}
+    .stitle.li em{color:var(--cyan)}
+
+    /* ── SERVICES ── */
+    .svc-bg{background:var(--off)}
+    .svc-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;gap:36px}
+    .svc-sub{max-width:340px;font-size:.8rem;line-height:1.85;color:var(--muted);font-weight:300}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+    .sc{background:var(--off);padding:46px 38px;position:relative;overflow:hidden;transition:background .4s}
+    .sc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sky),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+    .sc:hover{background:var(--deep)}
+    .sc:hover::after{transform:scaleX(1)}
+    .sc:hover .sc-n{color:var(--cyan)}
+    .sc:hover .sc-nm{color:#fff}
+    .sc:hover .sc-tx{color:rgba(255,255,255,.4)}
+    .sc-n{font-size:.6rem;letter-spacing:.28em;color:var(--sky);font-weight:500;margin-bottom:14px;transition:color .4s}
+    .sc-nm{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--deep);margin-bottom:12px;font-weight:600;transition:color .4s;line-height:1.2}
+    .sc-tx{font-size:.76rem;line-height:1.82;color:var(--muted);font-weight:300;transition:color .4s}
+
+    /* ── WORK ── */
+    .work-bg{background:var(--sand)}
+    .work-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:36px}
+    .work-lnk{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(43,108,176,.3);padding-bottom:2px;transition:color .3s,border-color .3s;white-space:nowrap}
+    .work-lnk:hover{color:var(--sky);border-color:var(--sky)}
+
+    /* Featured two-column card */
+    .feat{display:none}
+    .feat{display:grid;grid-template-columns:1.05fr 1fr;border:1px solid var(--border);border-radius:8px;overflow:hidden;min-height:520px}
+    .feat-left{position:relative;background:linear-gradient(140deg,#0c1e35 0%,#1a3454 45%,#0a2438 100%);display:flex;align-items:center;justify-content:center;padding:32px}
+    .feat-right{background:var(--deep);padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+    .feat-tag{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);font-weight:500;margin-bottom:10px}
+    .feat-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:#fff;line-height:1.1;margin-bottom:6px}
+    .feat-url{font-size:.66rem;letter-spacing:.14em;color:var(--sky);text-decoration:none;display:inline-block;margin-bottom:18px;transition:color .3s}
+    .feat-url:hover{color:var(--cyan)}
+    .feat-desc{font-size:.78rem;line-height:1.9;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:12px}
+    .feat-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+    /* ── PORTFOLIO GRID ── */
+    .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:3px}
+    .pcard{border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s}
+    .pcard:hover{transform:translateY(-3px)}
+    .pcard-preview{position:relative;height:380px}
+    .pcard-bg{position:absolute;inset:0}
+    .pcard-mock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:28px}
+    .pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,30,.95) 0%,rgba(8,18,30,.1) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+    .pcard-tag{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);font-weight:500;margin-bottom:6px}
+    .pcard-name{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;font-weight:600;margin-bottom:8px}
+    .pcard-hint{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:opacity .3s}
+    .pcard.open .pcard-hint{opacity:0}
+    .pcard-detail{max-height:0;overflow:hidden;transition:max-height .55s ease}
+    .pcard.open .pcard-detail{max-height:700px}
+    .pcard-detail-inner{background:var(--deep);padding:40px}
+    .pcard-di-left{}
+    .pill{font-size:.54rem;letter-spacing:.17em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(74,159,212,.25);padding:5px 11px;border-radius:20px;font-weight:500;background:rgba(74,159,212,.07)}
+
+    /* Mock screen inside feat-left */
+    .mock{width:100%;max-width:360px;background:rgba(255,255,255,.04);border:1px solid rgba(74,159,212,.16);border-radius:6px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+    .m-top{background:rgba(26,52,84,.9);padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
+    .m-logo{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.9);letter-spacing:.06em}
+    .m-logo span{color:var(--cyan)}
+    .m-badge{font-size:.46rem;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(90deg,var(--sky),var(--cyan));color:var(--deep);padding:3px 8px;border-radius:20px;font-weight:600}
+    .m-nav{display:flex;gap:3px;padding:7px 10px;background:rgba(10,22,38,.65);border-bottom:1px solid rgba(74,159,212,.1)}
+    .m-ni{font-size:.48rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.36);padding:3px 8px;border-radius:3px}
+    .m-ni.on{background:rgba(74,159,212,.15);color:var(--cyan)}
+    .m-body{padding:14px}
+    .m-lbl{font-size:.46rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sky);margin-bottom:8px;font-weight:500}
+    .m-qcard{background:rgba(255,255,255,.04);border:1px solid rgba(74,159,212,.12);border-radius:4px;padding:11px;margin-bottom:8px}
+    .m-qt{font-size:.56rem;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:8px}
+    .m-opts{display:flex;flex-direction:column;gap:4px}
+    .m-o{font-size:.48rem;color:rgba(255,255,255,.4);padding:4px 8px;border-radius:3px;border:1px solid rgba(74,159,212,.08)}
+    .m-o.sel{background:rgba(74,159,212,.15);border-color:rgba(74,159,212,.4);color:var(--cyan)}
+    .m-stats{display:flex;gap:6px;margin-top:8px}
+    .m-st{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(74,159,212,.1);border-radius:3px;padding:6px;text-align:center}
+    .m-sn{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--cyan);display:block;line-height:1}
+    .m-sl{font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:3px;display:block}
+    .m-ai{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);background:rgba(74,159,212,.1);border:1px solid rgba(74,159,212,.2);padding:4px 9px;border-radius:20px}
+    .ai-d{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:aiP 1.5s ease infinite}
+
+    /* ── HOW IT WORKS ── */
+    .hiw{background:var(--off)}
+    .hiw-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+    .hiw-left{}
+    .hiw-intro{font-size:.84rem;line-height:1.9;color:var(--muted);font-weight:300;margin-top:20px;margin-bottom:40px}
+    .hiw-steps{display:flex;flex-direction:column;gap:0}
+    .hiw-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border)}
+    .hiw-step:last-child{border-bottom:none}
+    .hiw-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--border);font-weight:600;line-height:1;flex-shrink:0;width:36px}
+    .hiw-step:hover .hiw-num{color:var(--sky);transition:color .3s}
+    .hiw-step-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--deep);margin-bottom:6px;font-weight:600}
+    .hiw-step-txt{font-size:.76rem;line-height:1.82;color:var(--muted);font-weight:300}
+    .hiw-right{background:var(--deep);border-radius:8px;padding:44px;border:1px solid var(--border)}
+    .hiw-feat-label{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);font-weight:500;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+    .hiw-feat-label::before{content:'';width:20px;height:1px;background:var(--cyan)}
+    .hiw-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+    .hiw-stat{background:rgba(255,255,255,.04);border:1px solid rgba(74,159,212,.12);border-radius:6px;padding:20px;text-align:center}
+    .hiw-stat-n{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--cyan);display:block;line-height:1;margin-bottom:6px}
+    .hiw-stat-l{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:400}
+    .hiw-quote{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:rgba(255,255,255,.6);line-height:1.65;padding-top:24px;border-top:1px solid rgba(74,159,212,.12)}
+    .hiw-quote-src{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-top:10px;display:block;font-style:normal;font-family:'DM Sans',sans-serif}
+    .hiw-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .hiw-feat-row{display:flex;align-items:flex-start;gap:12px;font-size:.76rem;line-height:1.6;color:rgba(255,255,255,.55);font-weight:300}
+    .hiw-check{width:18px;height:18px;border-radius:50%;background:rgba(74,159,212,.15);border:1px solid rgba(74,159,212,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .hiw-check svg{width:10px;height:10px}
+
+    /* ── PROCESS ── */
+    .proc-bg{background:var(--deep);overflow:hidden}
+    .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:60px;position:relative}
+    .proc-grid::before{content:'';position:absolute;top:23px;left:12%;right:12%;height:1px;background:linear-gradient(to right,transparent,rgba(74,159,212,.22),rgba(74,159,212,.22),transparent)}
+    .ps{padding:0 30px;opacity:0;transform:translateY(26px);transition:opacity .6s,transform .6s}
+    .ps.vis{opacity:1;transform:translateY(0)}
+    .ps-c{width:46px;height:46px;border-radius:50%;border:1px solid rgba(74,159,212,.32);background:var(--deep);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;color:var(--cyan);margin-bottom:26px;position:relative;z-index:1}
+    .ps-t{font-family:'Playfair Display',serif;font-size:1.12rem;color:#fff;margin-bottom:10px;font-weight:600}
+    .ps-d{font-size:.74rem;line-height:1.82;color:rgba(255,255,255,.36);font-weight:300}
+
+    /* ── CONTACT ── */
+    .con-bg{background:var(--off)}
+    .con-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:90px;align-items:start}
+    .con-intro{font-size:.8rem;line-height:1.88;color:var(--muted);font-weight:300;margin:22px 0 40px}
+    .con-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .con-lbl{font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sky);font-weight:500;width:64px}
+    .con-val{font-size:.78rem;color:var(--navy);font-weight:400}
+    .form{display:flex;flex-direction:column;gap:18px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .form input,.form textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(43,108,176,.2);padding:12px 0;font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--navy);font-weight:300;outline:none;resize:none;transition:border-color .3s}
+    .form input:focus,.form textarea:focus{border-color:var(--sky)}
+    .form input::placeholder,.form textarea::placeholder{color:rgba(90,112,128,.45);font-size:.76rem}
+    .btn-sub{align-self:flex-start;margin-top:6px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--navy);padding:15px 34px;border:none;font-family:'DM Sans',sans-serif;font-weight:500;cursor:none;position:relative;overflow:hidden;transition:transform .3s;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px))}
+    .btn-sub::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--mid),var(--sky));transform:translateX(-100%);transition:transform .4s}
+    .btn-sub:hover{transform:translateY(-2px)}
+    .btn-sub:hover::after{transform:translateX(0)}
+    .btn-sub span{position:relative;z-index:1}
+
+    /* ── FOOTER ── */
+    footer{background:#080f18;border-top:1px solid rgba(74,159,212,.07);padding:44px 60px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .f-copy{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.18)}
+    .f-links{display:flex;gap:22px}
+    .f-links a{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.24);text-decoration:none;transition:color .3s}
+    .f-links a:hover{color:var(--cyan)}
+
+    /* ── REVEAL ── */
+    .rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+    .rv.vis{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* ── KEYFRAMES ── */
+    @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fi{from{opacity:0}to{opacity:1}}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(0)}10%{opacity:.3}90%{opacity:.07}100%{opacity:0;transform:translateY(-110px) scale(1.4)}}
+    @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+    @keyframes aiP{0%,100%{opacity:1}50%{opacity:.25}}
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <svg viewBox="0 0 42 42" fill="none">
+      <rect x="6"  y="20" width="5" height="14" rx="1" fill="#4a9fd4"/>
+      <rect x="14" y="13" width="5" height="21" rx="1" fill="#5ab0df"/>
+      <rect x="22" y="8"  width="5" height="26" rx="1" fill="#7ec8e3"/>
+      <rect x="30" y="16" width="5" height="18" rx="1" fill="#4a9fd4" opacity=".7"/>
+      <path d="M4 38 Q10.5 33 17 36 Q23.5 39 30 34 Q36.5 29 39 32" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
+    </svg>
+    <div class="logo-t">
+      <span class="logo-m">Coastal Digital</span>
+      <span class="logo-s">Web Design · Jacksonville, FL</span>
+    </div>
+  </a>
+  <ul class="nav-ul">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Start a Project</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-waves">
+    <svg viewBox="0 0 1440 360" preserveAspectRatio="none">
+      <path d="M0,240 Q180,190 360,220 Q540,250 720,190 Q900,130 1080,170 Q1260,210 1440,160 L1440,360 L0,360 Z" fill="rgba(26,52,84,.35)"/>
+      <path d="M0,280 Q200,240 420,265 Q640,290 860,240 Q1080,190 1280,225 Q1380,242 1440,220 L1440,360 L0,360 Z" fill="rgba(12,22,36,.45)"/>
+      <path d="M0,220 C240,195 480,240 720,215 C960,190 1200,228 1440,208" stroke="rgba(74,159,212,.18)" stroke-width="1" fill="none"/>
+      <path d="M0,255 C220,230 460,268 700,248 C940,228 1180,258 1440,240" stroke="rgba(126,200,227,.1)" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+  <div class="pts" id="pts"></div>
+  <div class="hero-c">
+    <p class="h-eyebrow"><span class="h-line"></span>Premium Web Design · Jacksonville, FL</p>
+    <h1 class="h-title">We build digital<br>experiences that<br><span class="h-grad">make waves</span></h1>
+    <p class="h-body">Bespoke websites for businesses that want to stand out. Strategy to launch — built clean, built fast, and built to grow with you.</p>
+    <div class="h-btns">
+      <a href="#contact" class="btn-fill">Start Your Project →</a>
+      <a href="#work" class="btn-ghost">View Our Work</a>
+    </div>
+  </div>
+  <div class="h-loc"><div class="loc-d"></div>Jacksonville, Florida</div>
+  <div class="h-scroll"><span class="h-stxt">Scroll</span><div class="h-sbar"></div></div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-t">
+    <span class="ti">Web Design</span><span class="ts"></span>
+    <span class="ti">Brand Identity</span><span class="ts"></span>
+    <span class="ti">E-Commerce</span><span class="ts"></span>
+    <span class="ti">UI / UX Strategy</span><span class="ts"></span>
+    <span class="ti">SEO Optimization</span><span class="ts"></span>
+    <span class="ti">Jacksonville, FL</span><span class="ts"></span>
+    <span class="ti">Web Design</span><span class="ts"></span>
+    <span class="ti">Brand Identity</span><span class="ts"></span>
+    <span class="ti">E-Commerce</span><span class="ts"></span>
+    <span class="ti">UI / UX Strategy</span><span class="ts"></span>
+    <span class="ti">SEO Optimization</span><span class="ts"></span>
+    <span class="ti">Jacksonville, FL</span><span class="ts"></span>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section class="svc-bg sp" id="services">
+  <div class="w">
+    <div class="svc-hd rv">
+      <div>
+        <p class="ey">What We Do</p>
+        <h2 class="stitle">Crafted for brands<br>that <em>demand more</em></h2>
+      </div>
+      <p class="svc-sub">No templates. No shortcuts. Every project starts from a blank canvas and is built around what your business actually needs.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="sc rv d1"><div class="sc-n">01</div><h3 class="sc-nm">Bespoke Web Design</h3><p class="sc-tx">Custom-designed from scratch. Every element considered, every interaction refined. Nothing off the shelf — ever.</p></div>
+      <div class="sc rv d2"><div class="sc-n">02</div><h3 class="sc-nm">Brand Identity</h3><p class="sc-tx">Logo, typography, color systems — the visual language of your brand crafted to communicate authority everywhere.</p></div>
+      <div class="sc rv d3"><div class="sc-n">03</div><h3 class="sc-nm">E-Commerce</h3><p class="sc-tx">High-converting storefronts where aesthetic excellence meets frictionless purchasing. Your product deserves a stage.</p></div>
+      <div class="sc rv d1"><div class="sc-n">04</div><h3 class="sc-nm">UI / UX Strategy</h3><p class="sc-tx">Interfaces designed around your users. We map every journey so visitors find what they need — effortlessly.</p></div>
+      <div class="sc rv d2"><div class="sc-n">05</div><h3 class="sc-nm">SEO & Performance</h3><p class="sc-tx">Beautiful sites that search engines love. Speed and discoverability baked in from day one so your investment compounds.</p></div>
+      <div class="sc rv d3"><div class="sc-n">06</div><h3 class="sc-nm">Ongoing Partnership</h3><p class="sc-tx">Retainer relationships to keep your digital presence evolving and staying ahead of your competition. Always.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUR MOST RECENT WORK ══ -->
+<section class="work-bg sp" id="work">
+  <div class="w">
+    <div class="work-hd rv">
+      <div>
+        <p class="ey">Our Most Recent Work</p>
+        <h2 class="stitle">Built from the ground up —<br><em>live and growing</em></h2>
+      </div>
+      <a href="#contact" class="work-lnk">Start Your Project →</a>
+    </div>
+
+    <!-- BoardPass+ featured two-column card -->
+    <div class="feat rv">
+      <div class="feat-left">
+        <div class="mock">
+          <div class="m-top">
+            <span class="m-logo">Board<span>Pass</span>+</span>
+            <span class="m-badge">Pro</span>
+          </div>
+          <div class="m-nav">
+            <div class="m-ni on">Home</div>
+            <div class="m-ni">Exams</div>
+            <div class="m-ni">Practice</div>
+            <div class="m-ni">Study Guide</div>
+            <div class="m-ni">History</div>
+          </div>
+          <div class="m-body">
+            <div class="m-lbl">CFP® Practice — Today's Session</div>
+            <div class="m-qcard">
+              <div class="m-qt">Which best describes the primary goal of an asset allocation strategy in retirement planning?</div>
+              <div class="m-opts">
+                <div class="m-o">Maximize short-term returns</div>
+                <div class="m-o sel">Balance growth &amp; income preservation ✓</div>
+                <div class="m-o">Eliminate all investment risk</div>
+                <div class="m-o">Focus solely on dividend income</div>
+              </div>
+            </div>
+            <div class="m-stats">
+              <div class="m-st"><span class="m-sn" style="color:#7ec8e3">4k+</span><span class="m-sl">Questions</span></div>
+              <div class="m-st"><span class="m-sn" style="color:#6bcb77">5</span><span class="m-sl">Exams</span></div>
+              <div class="m-st"><span class="m-sn">24/7</span><span class="m-sl">AI Coach</span></div>
+            </div>
+            <div class="m-ai"><div class="ai-d"></div>AI Coach Active</div>
+          </div>
+        </div>
+      </div>
+      <div class="feat-right">
+        <div class="feat-tag">SaaS · EdTech · AI Platform</div>
+        <h3 class="feat-title">BoardPass+</h3>
+        <a href="https://boardpassplus.com" target="_blank" class="feat-url">boardpassplus.com ↗</a>
+        <p class="feat-desc">Full-stack exam prep platform for financial professionals — CFP®, SIE, Series 7, and Series 66. Built from concept to launch: custom Next.js frontend, Firebase authentication, Firestore database, and Stripe billing.</p>
+        <p class="feat-desc">The AI integration is what makes it different. Every session is powered by an intelligent coaching engine that analyzes wrong answers, identifies mistake patterns, and builds a personalized study plan for the following day. It doesn't just grade you. It learns how you think.</p>
+        <div class="feat-pills">
+          <span class="pill">Next.js</span>
+          <span class="pill">Firebase</span>
+          <span class="pill">Stripe</span>
+          <span class="pill">AI Coaching</span>
+          <span class="pill">Vercel</span>
+          <span class="pill">4,000+ Questions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW BOARDPASS+ WORKS ══ -->
+<section class="hiw sp" id="how">
+  <div class="w">
+    <div class="rv">
+      <p class="ey">Inside the Product</p>
+      <h2 class="stitle">How BoardPass+ <em>actually works</em></h2>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-left rv">
+        <p class="hiw-intro">BoardPass+ isn't just a question bank. It's a fully integrated study system that adapts to how you learn, where you struggle, and what you need to work on next — automatically.</p>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-num">01</div>
+            <div>
+              <div class="hiw-step-title">Weighted Practice Questions</div>
+              <div class="hiw-step-txt">4,000+ questions across CFP®, SIE, Series 7, and Series 66 — weighted to match real exam difficulty. Every answer includes a brain-emoji memory cue designed to make the correct answer stick long-term.</div>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">02</div>
+            <div>
+              <div class="hiw-step-title">AI-Powered Coach</div>
+              <div class="hiw-step-txt">After each session, the AI-powered coach analyzes your wrong answers, identifies the pattern in your mistakes, and builds a targeted study plan for tomorrow. It doesn't just tell you what you got wrong — it figures out why, and what to do next.</div>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">03</div>
+            <div>
+              <div class="hiw-step-title">Progress Tracking & History</div>
+              <div class="hiw-step-txt">Every session is stored. You can track accuracy by domain, review past sessions, and see your improvement over time. The platform gets smarter the more you use it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hiw-right rv d2">
+        <div class="hiw-feat-label">Platform Stats</div>
+        <div class="hiw-stat-grid">
+          <div class="hiw-stat">
+            <span class="hiw-stat-n">4,000+</span>
+            <span class="hiw-stat-l">Practice Questions</span>
+          </div>
+          <div class="hiw-stat">
+            <span class="hiw-stat-n">5</span>
+            <span class="hiw-stat-l">Board Exams Covered</span>
+          </div>
+          <div class="hiw-stat">
+            <span class="hiw-stat-n">24/7</span>
+            <span class="hiw-stat-l">AI Coaching</span>
+          </div>
+          <div class="hiw-stat">
+            <span class="hiw-stat-n">Free</span>
+            <span class="hiw-stat-l">To Start</span>
+          </div>
+        </div>
+        <div class="hiw-feat-label" style="margin-bottom:16px">What's Included</div>
+        <div class="hiw-features">
+          <div class="hiw-feat-row">
+            <div class="hiw-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Brain-emoji memory aids on every single question
+          </div>
+          <div class="hiw-feat-row">
+            <div class="hiw-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            AI-powered daily study plan built from your mistakes
+          </div>
+          <div class="hiw-feat-row">
+            <div class="hiw-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Full CFP®, SIE, Series 7 & Series 66 question banks
+          </div>
+          <div class="hiw-feat-row">
+            <div class="hiw-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Session history and domain-level accuracy tracking
+          </div>
+          <div class="hiw-feat-row">
+            <div class="hiw-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Free to start — Pro plan unlocks the full experience
+          </div>
+        </div>
+        <div class="hiw-quote">
+          "The only exam prep that reviews you before you study, coaches you after you practice, and builds tomorrow's plan tonight."
+          <span class="hiw-quote-src">— boardpassplus.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="proc-bg sp" id="process">
+  <div class="w">
+    <div class="rv">
+      <p class="ey" style="color:var(--cyan)">How We Work</p>
+      <h2 class="stitle li">A meticulous <em>process</em><br>from brief to launch</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="ps" style="transition-delay:.1s"><div class="ps-c">01</div><h3 class="ps-t">Discovery</h3><p class="ps-d">We immerse ourselves in your brand, goals, and audience — building the foundation everything rests on.</p></div>
+      <div class="ps" style="transition-delay:.2s"><div class="ps-c">02</div><h3 class="ps-t">Strategy</h3><p class="ps-d">Wireframes, sitemap, content strategy — every decision mapped with intention before a line of code is written.</p></div>
+      <div class="ps" style="transition-delay:.3s"><div class="ps-c">03</div><h3 class="ps-t">Design</h3><p class="ps-d">High-fidelity designs refined until extraordinary. Every screen, state, and interaction considered in full.</p></div>
+      <div class="ps" style="transition-delay:.4s"><div class="ps-c">04</div><h3 class="ps-t">Launch</h3><p class="ps-d">Pixel-perfect development, rigorous testing, and a seamless launch — with ongoing support so you're never alone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="con-bg sp" id="contact">
+  <div class="w">
+    <div class="con-grid">
+      <div class="rv">
+        <p class="ey">Get In Touch</p>
+        <h2 class="stitle">Let's build<br>something<br><em>extraordinary</em></h2>
+        <p class="con-intro">Ready to build something you're proud of? Tell us about your project and we'll get back to you within one business day.</p>
+        <div class="con-row"><span class="con-lbl">Email</span><span class="con-val">coastaldigitalco&#64;gmail.com</span></div>
+        <div class="con-row"><span class="con-lbl">Based</span><span class="con-val">Jacksonville, FL — Serving Worldwide</span></div>
+      </div>
+      <div class="rv d2">
+        <form class="form" action="https://formspree.io/f/xgonlwpb" method="POST">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your Name" required/>
+            <input type="email" name="email" placeholder="Email Address" required/>
+          </div>
+          <input type="text" name="company" placeholder="Company / Brand"/>
+          <input type="text" name="project_type" placeholder="Project Type (Web Design, Branding…)"/>
+          <textarea rows="5" name="message" placeholder="Tell us about your project…"></textarea>
+          <button type="submit" class="btn-sub"><span>Send Enquiry →</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <a href="#" class="logo" style="opacity:.45">
+    <svg width="30" height="30" viewBox="0 0 42 42" fill="none">
+      <rect x="6"  y="20" width="5" height="14" rx="1" fill="#4a9fd4"/>
+      <rect x="14" y="13" width="5" height="21" rx="1" fill="#7ec8e3"/>
+      <rect x="22" y="8"  width="5" height="26" rx="1" fill="#7ec8e3"/>
+      <path d="M4 38 Q10.5 33 17 36 Q23.5 39 30 34 Q36.5 29 39 32" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span style="font-size:.82rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)">Coastal Digital</span>
+  </a>
+  <p class="f-copy">© 2026 Coastal Digital. Jacksonville, FL. All rights reserved.</p>
+  <div class="f-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Toggle portfolio cards
+  function toggleCard(el){
+    el.classList.toggle('open');
+    if(el.classList.contains('open')){
+      setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+    }
+  }
+
+  // Custom cursor
+  const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+  });
+  (function anim(){
+    rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+    curR.style.left=rx+'px';curR.style.top=ry+'px';
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.sc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';curR.style.width='48px';curR.style.height='48px';});
+    el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';curR.style.width='32px';curR.style.height='32px';});
+  });
+
+  // Nav scroll
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
+
+  // Floating particles in hero
+  const pts=document.getElementById('pts');
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');
+    p.className='pt';
+    const s=Math.random()*3+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:${Math.random()*35}%;animation-duration:${Math.random()*7+5}s;animation-delay:${Math.random()*7}s;`;
+    pts.appendChild(p);
+  }
+
+  // Scroll reveal
+  const io=new I
