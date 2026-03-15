@@ -18,25 +18,29 @@
 <meta name="google-site-verification" content="CrB7_28FiPYQuagfBABhmZJmteAkE4-dXWSWwmTt__c">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://coastaldigital.co">
-
 <!-- Open Graph -->
 <meta property="og:title" content="Coastal Digital | Web Design Agency Jacksonville, FL">
 <meta property="og:description" content="We build custom websites, SEO strategies, and brand identities for businesses in Jacksonville, FL. Start a project today.">
 <meta property="og:url" content="https://coastaldigital.co">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coastal Digital">
-
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Coastal Digital | Web Design Agency Jacksonville, FL">
 <meta name="twitter:description" content="Custom websites, SEO, and brand identities for businesses in Jacksonville, FL.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#1a3454;--deep:#0f1e30;--sky:#4a9fd4;--cyan:#7ec8e3;--white:#f8fafc;--gray:#94a3b8;--card-bg:#1e3a52}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--deep);color:var(--white);overflow-x:hidden}
+
+/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s}
 nav.scrolled{background:var(--navy);box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--white);font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
@@ -46,6 +50,22 @@ nav.scrolled{background:var(--navy);box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .nav-links a:hover{color:var(--cyan)}
 .nav-cta{background:var(--sky);color:var(--deep)!important;padding:.5rem 1.25rem;border-radius:6px;font-weight:600!important}
 .nav-cta:hover{background:var(--cyan)!important}
+
+/* hamburger */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:110}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:transform .3s, opacity .3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile drawer */
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;transition:opacity .3s}
+.mobile-menu.open{opacity:1}
+.mobile-menu a{color:var(--white);text-decoration:none;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;transition:color .2s}
+.mobile-menu a:hover{color:var(--cyan)}
+.mobile-menu .mob-cta{background:var(--sky);color:var(--deep)!important;padding:.75rem 2rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600}
+
+/* ── HERO ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--deep) 0%,var(--navy) 60%,var(--deep) 100%)}
 .hero-badge{display:inline-block;background:rgba(126,200,227,.12);border:1px solid rgba(126,200,227,.3);color:var(--cyan);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.15;max-width:800px;margin-bottom:1.5rem}
@@ -63,26 +83,37 @@ nav.scrolled{background:var(--navy);box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .wave2{animation:wave-move 12s linear infinite reverse;opacity:.3}
 .wave3{animation:wave-move 6s linear infinite;opacity:.7}
 @keyframes wave-move{0%{transform:translateX(0)}100%{transform:translateX(33.33%)}}
+
+/* ── TICKER ── */
 .ticker{background:var(--navy);border-top:1px solid rgba(126,200,227,.15);border-bottom:1px solid rgba(126,200,227,.15);padding:.85rem 0;overflow:hidden}
 .ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 28s linear infinite}
 .ticker-item{display:inline-flex;align-items:center;gap:.75rem;padding:0 2.5rem;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
 .ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--sky);flex-shrink:0}
 @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SHARED ── */
 section{padding:6rem 2rem}
 .section-label{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin-bottom:.75rem}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem;line-height:1.2}
 .section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:560px}
 .container{max-width:1140px;margin:0 auto}
-.services{background:var(--deep)}
+
+/* ── SERVICES (light) ── */
+.services{background:#f5f2ee}
+.services .section-label{color:#4a9fd4}
+.services .section-title{color:#1a3454}
+.services .section-sub{color:#4a5568}
 .services-header{text-align:center;margin-bottom:3.5rem}
 .services-header .section-sub{margin:0 auto}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.service-card{background:var(--card-bg);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:background .25s,border-color .25s,transform .25s}
-.service-card:hover{background:var(--navy);border-color:rgba(126,200,227,.25);transform:translateY(-4px)}
-.service-icon{width:44px;height:44px;background:rgba(74,159,212,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.service-card{background:#fff;border:1px solid #e2ddd8;box-shadow:0 2px 12px rgba(26,52,84,.07);border-radius:12px;padding:2rem;transition:background .25s,border-color .25s,transform .25s}
+.service-card:hover{background:#f0f7ff;border-color:#4a9fd4;transform:translateY(-4px)}
+.service-icon{width:44px;height:44px;background:rgba(74,159,212,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
 .service-icon svg{width:22px;height:22px;stroke:var(--cyan)}
-.service-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.6rem}
-.service-card p{color:var(--gray);font-size:.9rem;line-height:1.65}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.6rem;color:#1a3454}
+.service-card p{color:#4a5568;font-size:.9rem;line-height:1.65}
+
+/* ── WORK (dark) ── */
 .work{background:var(--navy)}
 .work-header{margin-bottom:3rem}
 .feat{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card-bg);border:1px solid rgba(126,200,227,.15);border-radius:16px;overflow:hidden}
@@ -109,94 +140,110 @@ section{padding:6rem 2rem}
 .tech-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
 .tech-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--gray);font-size:.78rem;font-weight:500;padding:.3rem .75rem;border-radius:100px}
 .feat-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--cyan);text-decoration:none;font-weight:600;font-size:.9rem;transition:gap .2s}
-.feat-link:hover{gap:.8rem}.how{background:var(--deep)}
-.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.how-steps{display:flex;flex-direction:column;gap:2rem}
-.how-step{display:flex;gap:1.25rem;align-items:flex-start}
-.step-num{width:36px;height:36px;border-radius:50%;background:rgba(74,159,212,.2);border:1px solid var(--sky);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--sky);flex-shrink:0;margin-top:2px}
-.how-step h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.4rem}
-.how-step p{color:var(--gray);font-size:.9rem;line-height:1.65}
-.stats-panel{background:var(--card-bg);border:1px solid rgba(126,200,227,.15);border-radius:16px;padding:2.5rem}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
-.stat-item{text-align:center}
-.stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--cyan);font-weight:700}
-.stat-label{font-size:.8rem;color:var(--gray);margin-top:.2rem}
-.features-list{display:flex;flex-direction:column;gap:.75rem}
-.feature-item{display:flex;align-items:center;gap:.75rem;font-size:.9rem;color:var(--white)}
-.check-icon{width:20px;height:20px;background:rgba(126,200,227,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.check-icon svg{width:11px;height:11px;stroke:var(--cyan)}
-.process{background:var(--navy)}
-.process-header{text-align:center;margin-bottom:4rem}
-.process-header .section-sub{margin:0 auto}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
-.process-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem 1.5rem;position:relative}
-.process-card::after{content:'';position:absolute;top:50%;right:-1rem;transform:translateY(-50%);width:1.5rem;height:1px;background:rgba(126,200,227,.3)}
-.process-card:last-child::after{display:none}
-.process-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:rgba(126,200,227,.15);font-weight:700;line-height:1;margin-bottom:1rem}
-.process-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.5rem}
-.process-card p{color:var(--gray);font-size:.875rem;line-height:1.65}
-.contact{background:var(--deep)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.contact-info h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:1rem;line-height:1.2}
-.contact-info p{color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:2rem}
-.contact-detail{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;color:var(--white);font-size:.9rem}
-.contact-detail a{color:var(--cyan);text-decoration:none;transition:color .2s}
-.contact-detail a:hover{color:var(--sky)}
-.contact-form{display:flex;flex-direction:column;gap:1rem}
-.form-group{display:flex;flex-direction:column;gap:.4rem}
-.form-group label{font-size:.82rem;font-weight:600;color:var(--gray);letter-spacing:.04em}
-.form-group input,.form-group textarea,.form-group select{background:var(--card-bg);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;transition:border-color .2s;outline:none;width:100%}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sky)}
-.form-group select option{background:var(--navy)}
-.form-group textarea{min-height:120px;resize:vertical}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.btn-submit{background:var(--sky);color:var(--deep);border:none;border-radius:8px;padding:.9rem 2rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,transform .2s;align-self:flex-start}
-.btn-submit:hover{background:var(--cyan);transform:translateY(-2px)}
-.form-success{display:none;background:rgba(126,200,227,.1);border:1px solid rgba(126,200,227,.3);border-radius:8px;padding:1rem 1.25rem;color:var(--cyan);font-size:.9rem;text-align:center}
-footer{background:var(--deep);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 2rem}
-.footer-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-copy{font-size:.82rem;color:var(--gray)}
-.footer-links{display:flex;gap:1.5rem;list-style:none}
-.footer-links a{color:var(--gray);text-decoration:none;font-size:.82rem;transition:color .2s}
-.footer-links a:hover{color:var(--cyan)}
-@media(max-width:768px){nav{padding:1rem 1.25rem}.nav-links{display:none}.hero h1{font-size:2.2rem}.hero p{font-size:1rem}.services-grid,.feat{grid-template-columns:1fr}.feat-visual{min-height:280px;padding:2rem 1.5rem}.feat-info{padding:2rem 1.5rem}.how-grid{grid-template-columns:1fr;gap:2.5rem}.process-grid{grid-template-columns:1fr 1fr}.process-card::after{display:none}.contact-grid{grid-template-columns:1fr;gap:2.5rem}.form-row{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.footer-inner{flex-direction:column;text-align:center}}
-@media(max-width:480px){section{padding:4rem 1.25rem}.process-grid{grid-template-columns:1fr}}
+.feat-link:hover{gap:.8rem}
 
-/* Light palette overrides */
-.services{background:#f5f2ee}
-.services .section-label{color:#4a9fd4}
-.services .section-title{color:#1a3454}
-.services .section-sub{color:#4a5568}
-.service-card{background:#ffffff;border:1px solid #e2ddd8;box-shadow:0 2px 12px rgba(26,52,84,.07)}
-.service-card:hover{background:#f0f7ff;border-color:#4a9fd4}
-.service-card h3{color:#1a3454}
-.service-card p{color:#4a5568}
-.service-icon{background:rgba(74,159,212,.12)}
+/* ── TESTIMONIALS ── */
+.testimonials{background:#f5f2ee;padding:6rem 2rem}
+.testimonials .section-label{color:#4a9fd4}
+.testimonials .section-title{color:#1a3454}
+.testi-header{text-align:center;margin-bottom:3.5rem}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.testi-card{background:#fff;border:1px solid #e2ddd8;border-radius:14px;padding:2rem;box-shadow:0 2px 16px rgba(26,52,84,.07);display:flex;flex-direction:column;gap:1.25rem;transition:transform .25s,box-shadow .25s}
+.testi-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(26,52,84,.12)}
+.testi-stars{display:flex;gap:3px}
+.testi-stars svg{width:16px;height:16px;fill:#f59e0b}
+.testi-quote{font-family:'Playfair Display',serif;font-size:1rem;color:#1a3454;line-height:1.65;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:.75rem;margin-top:auto}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--deep);flex-shrink:0}
+.testi-name{font-weight:600;font-size:.88rem;color:#1a3454}
+.testi-role{font-size:.78rem;color:#94a3b8}
+
+/* ── PROCESS (light) ── */
 .process{background:#eef0f3}
 .process .section-label{color:#4a9fd4}
 .process .section-title{color:#1a3454}
 .process .section-sub{color:#4a5568}
-.process-card{background:#ffffff;border:1px solid #dde1e7}
-.process-card h3{color:#1a3454}
-.process-card p{color:#4a5568}
-.process-num{color:rgba(74,159,212,.25)}
-.process-card::after{background:rgba(74,159,212,.3)}
+.process-header{text-align:center;margin-bottom:4rem}
+.process-header .section-sub{margin:0 auto}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.process-card{background:#fff;border:1px solid #dde1e7;border-radius:12px;padding:2rem 1.5rem;position:relative}
+.process-card::after{content:'';position:absolute;top:50%;right:-1rem;transform:translateY(-50%);width:1.5rem;height:1px;background:rgba(74,159,212,.3)}
+.process-card:last-child::after{display:none}
+.process-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:rgba(74,159,212,.25);font-weight:700;line-height:1;margin-bottom:1rem}
+.process-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.5rem;color:#1a3454}
+.process-card p{color:#4a5568;font-size:.875rem;line-height:1.65}
+
+/* ── CONTACT (light warm) ── */
 .contact{background:#f9f6f1}
 .contact .section-label{color:#4a9fd4}
-.contact-info h2{color:#1a3454}
-.contact-info p{color:#4a5568}
-.contact-detail{color:#1a3454}
-.form-group label{color:#4a5568}
-.form-group input,.form-group textarea,.form-group select{background:#ffffff;border:1px solid #d4cfc9;color:#1a3454}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-info h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:1rem;line-height:1.2;color:#1a3454}
+.contact-info p{color:#4a5568;font-size:.95rem;line-height:1.7;margin-bottom:2rem}
+.contact-detail{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;color:#1a3454;font-size:.9rem}
+.contact-detail a{color:var(--sky);text-decoration:none;transition:color .2s}
+.contact-detail a:hover{color:var(--navy)}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-size:.82rem;font-weight:600;color:#4a5568;letter-spacing:.04em}
+.form-group input,.form-group textarea,.form-group select{background:#fff;border:1px solid #d4cfc9;border-radius:8px;padding:.85rem 1rem;color:#1a3454;font-family:'DM Sans',sans-serif;font-size:.9rem;transition:border-color .2s;outline:none;width:100%}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#4a9fd4}
 .form-group input::placeholder,.form-group textarea::placeholder{color:#9ca3af}
-.form-group select option{background:#ffffff;color:#1a3454}
-footer{background:#1a3454;border-top:none}
-.footer-copy{color:rgba(255,255,255,.5)}
-.footer-links a{color:rgba(255,255,255,.5)}
-.footer-links a:hover{color:#7ec8e3}
+.form-group select option{background:#fff;color:#1a3454}
+.form-group textarea{min-height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-submit{background:var(--sky);color:var(--deep);border:none;border-radius:8px;padding:.9rem 2rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,transform .2s;align-self:flex-start}
+.btn-submit:hover{background:var(--cyan);transform:translateY(-2px)}
+.form-success{display:none;background:rgba(74,159,212,.1);border:1px solid rgba(74,159,212,.3);border-radius:8px;padding:1rem 1.25rem;color:var(--sky);font-size:.9rem;text-align:center}
+
+/* ── FOOTER ── */
+footer{background:#1a3454;padding:3.5rem 2rem 2rem}
+.footer-top{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-brand .logo{margin-bottom:1rem;display:inline-flex}
+.footer-brand p{color:rgba(255,255,255,.5);font-size:.85rem;line-height:1.65;max-width:220px}
+.footer-col h4{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--white);margin-bottom:1rem;font-weight:700}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-col ul a:hover{color:var(--cyan)}
+.footer-social{display:flex;gap:.75rem;margin-top:1.25rem}
+.footer-social a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.footer-social a:hover{background:rgba(126,200,227,.15);border-color:var(--cyan)}
+.footer-social svg{width:15px;height:15px;stroke:rgba(255,255,255,.6);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.footer-bottom{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.75rem}
+.footer-copy{font-size:.82rem;color:rgba(255,255,255,.35)}
+.footer-legal{display:flex;gap:1.5rem;list-style:none}
+.footer-legal a{color:rgba(255,255,255,.35);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-legal a:hover{color:var(--cyan)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .hero h1{font-size:2.2rem}
+  .hero p{font-size:1rem}
+  .services-grid,.feat,.testi-grid{grid-template-columns:1fr}
+  .feat-visual{min-height:280px;padding:2rem 1.5rem}
+  .feat-info{padding:2rem 1.5rem}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .process-card::after{display:none}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-brand{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  section{padding:4rem 1.25rem}
+  .process-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+}
 </style>
-</head><body>
+</head>
+<body>
+
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="logo">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,8 +261,20 @@ footer{background:#1a3454;border-top:none}
     <li><a href="#process">Process</a></li>
     <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#work" class="mob-link">Work</a>
+  <a href="#process" class="mob-link">Process</a>
+  <a href="#contact" class="mob-cta">Get a Quote</a>
+</div>
+
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-badge">Jacksonville, FL · Web Design &amp; Development</div>
   <h1>We build digital experiences<br>that <em>make waves.</em></h1>
@@ -231,22 +290,358 @@ footer{background:#1a3454;border-top:none}
   </div>
 </section>
 
-<div class="ticker"><div class="ticker-track"><span class="ticker-item"><span class="ticker-dot"></span>Web Design</span><span class="ticker-item"><span class="ticker-dot"></span>E-Commerce</span><span class="ticker-item"><span class="ticker-dot"></span>SEO Optimization</span><span class="ticker-item"><span class="ticker-dot"></span>Brand Identity</span><span class="ticker-item"><span class="ticker-dot"></span>Mobile Apps</span><span class="ticker-item"><span class="ticker-dot"></span>Performance Audits</span><span class="ticker-item"><span class="ticker-dot"></span>UI/UX Design</span><span class="ticker-item"><span class="ticker-dot"></span>Landing Pages</span><span class="ticker-item"><span class="ticker-dot"></span>Web Design</span><span class="ticker-item"><span class="ticker-dot"></span>E-Commerce</span><span class="ticker-item"><span class="ticker-dot"></span>SEO Optimization</span><span class="ticker-item"><span class="ticker-dot"></span>Brand Identity</span><span class="ticker-item"><span class="ticker-dot"></span>Mobile Apps</span><span class="ticker-item"><span class="ticker-dot"></span>Performance Audits</span><span class="ticker-item"><span class="ticker-dot"></span>UI/UX Design</span><span class="ticker-item"><span class="ticker-dot"></span>Landing Pages</span></div></div>
-<section class="services" id="services"><div class="container"><div class="services-header"><div class="section-label">What We Do</div><h2 class="section-title">Services Built to Perform</h2><p class="section-sub">From concept to launch, we handle every detail so you can focus on running your business.</p></div><div class="services-grid"><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h3>Website Design</h3><p>Custom-built websites that convert visitors into customers. Fast, responsive, and tailored to your brand.</p></div><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/><path d="M3 12h18"/></svg></div><h3>SEO &amp; Growth</h3><p>Data-driven SEO strategies that put your business in front of the right people at the right time.</p></div><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><h3>E-Commerce</h3><p>Shopify and WooCommerce stores built for high conversion &mdash; from product pages to checkout flows.</p></div><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Brand Identity</h3><p>Logos, color systems, and visual identities that make your brand instantly recognizable and memorable.</p></div><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h3>Mobile-First Dev</h3><p>Every site we build looks perfect and performs flawlessly on any device, from phone to desktop.</p></div><div class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Performance Audits</h3><p>We audit existing sites and identify exactly what's slowing you down or costing you conversions.</p></div></div></div></section>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>Web Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>E-Commerce</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>SEO Optimization</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Brand Identity</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mobile Apps</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Performance Audits</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>UI/UX Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Landing Pages</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Web Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>E-Commerce</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>SEO Optimization</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Brand Identity</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mobile Apps</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Performance Audits</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>UI/UX Design</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Landing Pages</span>
+  </div>
+</div>
 
-<section class="work" id="work"><div class="container"><div class="work-header"><div class="section-label">Our Most Recent Work</div><h2 class="section-title">BoardPass+</h2><p class="section-sub">AI-powered board exam prep.</p></div><div class="feat"><div class="feat-visual"><div class="bp-mock"><div class="bp-header"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" fill="#7ec8e3" opacity="0.9"/></svg><span class="bp-logo-text">BoardPass+</span><span class="bp-badge">Pro</span></div><div class="bp-body"><div class="bp-question-label">Question 1 of 25 &middot; INSURANCE</div><div class="bp-question">Which is TRUE about Health Savings Accounts (HSAs)?</div><div class="bp-options"><div class="bp-option"><span class="bp-option-letter">A</span>HSAs are available to anyone with any type of health insurance</div><div class="bp-option selected"><span class="bp-option-letter">B</span>HSAs require enrollment in a high-deductible health plan (HDHP)</div><div class="bp-option"><span class="bp-option-letter">C</span>HSA funds must be spent within the same calendar year or forfeited</div><div class="bp-option"><span class="bp-option-letter">D</span>HSA contributions are made with after-tax dollars and not deductible</div></div></div><div class="bp-footer"><span class="bp-progress-text">4% complete &middot; 3 day streak &#x1F525;</span><button class="bp-btn">Next &rarr;</button></div></div></div><div class="feat-info"><span class="feat-tag">Live Product</span><h3>BoardPass+</h3><p>BoardPass+ is a full-stack web application helping finance and insurance professionals prepare for high-stakes licensing exams using adaptive AI-powered question banks. Built with Firebase, Stripe, and a custom question engine covering 4,000+ practice questions across Series 7, Series 66, SIE, and CFP exams.</p><div class="tech-pills"><span class="tech-pill">Firebase</span><span class="tech-pill">Stripe</span><span class="tech-pill">JavaScript</span><span class="tech-pill">AI Integration</span><span class="tech-pill">Vercel</span></div><a href="https://boardpassplus.com" target="_blank" class="feat-link">Visit boardpassplus.com <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div></div></div></section>
-<section class="process" id="process"><div class="container"><div class="process-header"><div class="section-label">How We Work</div><h2 class="section-title">Our Process</h2><p class="section-sub">Four steps from first call to live site &mdash; typically 2&ndash;4 weeks.</p></div><div class="process-grid"><div class="process-card"><div class="process-num">01</div><h3>Discovery Call</h3><p>We learn about your business, goals, and competitors. No cookie-cutter solutions &mdash; everything starts with your specific situation.</p></div><div class="process-card"><div class="process-num">02</div><h3>Strategy &amp; Design</h3><p>We build wireframes and a visual design system unique to your brand. You approve everything before we write a single line of code.</p></div><div class="process-card"><div class="process-num">03</div><h3>Build &amp; Test</h3><p>We develop your site with clean, fast code. Cross-browser testing, mobile optimization, and performance tuning are built in &mdash; not bolted on.</p></div><div class="process-card"><div class="process-num">04</div><h3>Launch &amp; Support</h3><p>We handle the deployment and stay available for edits, questions, and growth as your business evolves.</p></div></div></div></section>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Services Built to Perform</h2>
+      <p class="section-sub">From concept to launch, we handle every detail so you can focus on running your business.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>Website Design</h3>
+        <p>Custom-built websites that convert visitors into customers. Fast, responsive, and tailored to your brand.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/><path d="M3 12h18"/></svg></div>
+        <h3>SEO &amp; Growth</h3>
+        <p>Data-driven SEO strategies that put your business in front of the right people at the right time.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <h3>E-Commerce</h3>
+        <p>Shopify and WooCommerce stores built for high conversion &mdash; from product pages to checkout flows.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>Brand Identity</h3>
+        <p>Logos, color systems, and visual identities that make your brand instantly recognizable and memorable.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <h3>Mobile-First Dev</h3>
+        <p>Every site we build looks perfect and performs flawlessly on any device, from phone to desktop.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Performance Audits</h3>
+        <p>We audit existing sites and identify exactly what's slowing you down or costing you conversions.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="contact" id="contact"><div class="container"><div class="contact-grid"><div class="contact-info"><div class="section-label">Get In Touch</div><h2>Ready to build something great?</h2><p>Tell us about your project. We'll respond within one business day with honest thoughts and a clear next step &mdash; no pressure, no sales pitch.</p><div class="contact-detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:coastaldigitalco@gmail.com">coastaldigitalco@gmail.com</a></div><div class="contact-detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jacksonville, FL</div></div><div><form class="contact-form" id="contactForm" action="https://formspree.io/f/xgonlwpb" method="POST"><div class="form-row"><div class="form-group"><label>First Name</label><input type="text" name="firstName" placeholder="John" required></div><div class="form-group"><label>Last Name</label><input type="text" name="lastName" placeholder="Smith" required></div></div><div class="form-group"><label>Email</label><input type="email" name="email" placeholder="john@yourcompany.com" required></div><div class="form-group"><label>Service Interested In</label><select name="service"><option value="">Select a service...</option><option>Website Design</option><option>E-Commerce</option><option>SEO &amp; Growth</option><option>Brand Identity</option><option>Performance Audit</option><option>Other</option></select></div><div class="form-group"><label>Tell Us About Your Project</label><textarea name="message" placeholder="What are you looking to build or improve?" required></textarea></div><button type="submit" class="btn-submit">Send Message &rarr;</button><div class="form-success" id="formSuccess">&#x2713; Message sent! We'll be in touch within one business day.</div></form></div></div></div></section>
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="container">
+    <div class="work-header">
+      <div class="section-label">Our Most Recent Work</div>
+      <h2 class="section-title">BoardPass+</h2>
+      <p class="section-sub">AI-powered board exam prep.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-visual">
+        <div class="bp-mock">
+          <div class="bp-header">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" fill="#7ec8e3" opacity="0.9"/></svg>
+            <span class="bp-logo-text">BoardPass+</span>
+            <span class="bp-badge">Pro</span>
+          </div>
+          <div class="bp-body">
+            <div class="bp-question-label">Question 1 of 25 &middot; INSURANCE</div>
+            <div class="bp-question">Which is TRUE about Health Savings Accounts (HSAs)?</div>
+            <div class="bp-options">
+              <div class="bp-option"><span class="bp-option-letter">A</span>HSAs are available to anyone with any type of health insurance</div>
+              <div class="bp-option selected"><span class="bp-option-letter">B</span>HSAs require enrollment in a high-deductible health plan (HDHP)</div>
+              <div class="bp-option"><span class="bp-option-letter">C</span>HSA funds must be spent within the same calendar year or forfeited</div>
+              <div class="bp-option"><span class="bp-option-letter">D</span>HSA contributions are made with after-tax dollars and not deductible</div>
+            </div>
+          </div>
+          <div class="bp-footer">
+            <span class="bp-progress-text">4% complete &middot; 3 day streak &#x1F525;</span>
+            <button class="bp-btn">Next &rarr;</button>
+          </div>
+        </div>
+      </div>
+      <div class="feat-info">
+        <span class="feat-tag">Live Product</span>
+        <h3>BoardPass+</h3>
+        <p>BoardPass+ is a full-stack web application helping finance and insurance professionals prepare for high-stakes licensing exams using adaptive AI-powered question banks. Built with Firebase, Stripe, and a custom question engine covering 4,000+ practice questions across Series 7, Series 66, SIE, and CFP exams.</p>
+        <div class="tech-pills">
+          <span class="tech-pill">Firebase</span>
+          <span class="tech-pill">Stripe</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">AI Integration</span>
+          <span class="tech-pill">Vercel</span>
+        </div>
+        <a href="https://boardpassplus.com" target="_blank" class="feat-link">Visit boardpassplus.com <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer><div class="footer-inner"><div class="footer-copy">&copy; 2025 Coastal Digital. All rights reserved.</div><ul class="footer-links"><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#contact">Contact</a></li><li><a href="mailto:coastaldigitalco@gmail.com">Email Us</a></li></ul></div></footer>
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="testi-header">
+      <div class="section-label">Client Love</div>
+      <h2 class="section-title" style="color:#1a3454">What Our Clients Say</h2>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <div class="testi-card" style="max-width:540px;">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testi-quote">"Working with Coastal Digital was seamless from day one. We built BoardPass+ together from the ground up — the attention to detail, the speed, and the quality of execution were exactly what the product needed to launch strong."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JS</div>
+          <div>
+            <div class="testi-name">Jack Spyke</div>
+            <div class="testi-role">Co-Founder, BoardPass+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script>
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
-const form=document.getElementById('contactForm');
-const success=document.getElementById('formSuccess');
-if(form){form.addEventListener('submit',async e=>{e.preventDefault();const btn=form.querySelector('.btn-submit');btn.textContent='Sending...';btn.disabled=true;try{const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});if(res.ok){form.reset();success.style.display='block';btn.style.display='none';}else{btn.textContent='Try Again';btn.disabled=false;}}catch{btn.textContent='Try Again';btn.disabled=false;}});}
-</script>
-</body>
-</html>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="process-header">
+      <div class="section-label">How We Work</div>
+      <h2 class="section-title">Our Process</h2>
+      <p class="section-sub">Four steps from first call to live site &mdash; typically 2&ndash;4 weeks.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h3>Discovery Call</h3>
+        <p>We learn about your business, goals, and competitors. No cookie-cutter solutions &mdash; everything starts with your specific situation.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h3>Strategy &amp; Design</h3>
+        <p>We build wireframes and a visual design system unique to your brand. You approve everything before we write a single line of code.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h3>Build &amp; Test</h3>
+        <p>We develop your site with clean, fast code. Cross-browser testing, mobile optimization, and performance tuning are built in &mdash; not bolted on.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h3>Launch &amp; Support</h3>
+        <p>We handle the deployment and stay available for edits, questions, and growth as your business evolves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-label">Get In Touch</div>
+        <h2>Ready to build something great?</h2>
+        <p>Tell us about your project. We'll respond within one business day with honest thoughts and a clear next step &mdash; no pressure, no sales pitch.</p>
+        <div class="contact-detail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="/cdn-cgi/l/email-protection#d7b4b8b6a4a3b6bbb3beb0bea3b6bbb4b897b0bab6bebbf9b4b8ba"><span class="__cf_email__" data-cfemail="c0a3afa1b3b4a1aca4a9a7a9b4a1aca3af80a7ada1a9aceea3afad">[email&#160;protected]</span></a>
+        </div>
+        <div class="contact-detail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Jacksonville, FL
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xgonlwpb" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="firstName" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="lastName" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="john@yourcompany.com" required>
+          </div>
+          <div class="form-group">
+            <label>Service Interested In</label>
+            <select name="service">
+              <option value="">Select a service...</option>
+              <option>Website Design</option>
+              <option>E-Commerce</option>
+              <option>SEO &amp; Growth</option>
+              <option>Brand Identity</option>
+              <option>Performance Audit</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea name="message" placeholder="What are you looking to build or improve?" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message &rarr;</button>
+          <div class="form-success" id="formSuccess">&#x2713; Message sent! We'll be in touch within one business day.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="18" width="4" height="10" rx="1" fill="#4a9fd4"/>
+          <rect x="10" y="12" width="4" height="16" rx="1" fill="#4a9fd4"/>
+          <rect x="16" y="7" width="4" height="21" rx="1" fill="#7ec8e3"/>
+          <rect x="22" y="14" width="4" height="14" rx="1" fill="#4a9fd4"/>
+          <path d="M2 26 Q8 22 14 24 Q20 26 28 21" stroke="#7ec8e3" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        Coastal Digital
+      </a>
+      <p>Web design &amp; development studio based in Jacksonville, FL. We build sites that actually move the needle.</p>
+      <div class="footer-social">
+        <!-- Instagram -->
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <!-- Twitter/X -->
+        <a href="#" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Website Design</a></li>
+        <li><a href="#services">SEO &amp; Growth</a></li>
+        <li><a href="#services">E-Commerce</a></li>
+        <li><a href="#services">Brand Identity</a></li>
+        <li><a href="#services">Performance Audits</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get Started</h4>
+      <ul>
+        <li><a href="#contact">Free Consultation</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#b4d7dbd5c7c0d5d8d0ddd3ddc0d5d8d7dbf4d3d9d5ddd89ad7dbd9">Email Us</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; <span id="year"></span> Coastal Digital. All rights reserved.</div>
+    <ul class="footer-legal">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Auto copyright year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Scrolled nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Mobile hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.contains('open');
+  if (isOpen) {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+  } else {
+    mobileMenu.style.display = 'flex';
+    requestAnimationFrame(() => mobileMenu.classList.add('open'));
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+});
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+  });
+});
+
+// Contact form
+const form = document.getElementById('contactForm');
+const success = document.getElementById('formSuccess');
+if (form) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+    
